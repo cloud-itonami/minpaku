@@ -1,0 +1,99 @@
+{
+  "@context": "https://etzhayyim.com/ns/kotodama/v1",
+  "@id": "did:web:minpaku.etzhayyim.com",
+  "component": {
+    "path": "/wasm/component.wasm"
+  },
+  "convoSystemPrompt": "You are minpaku agent. Minpaku — AI Agent for accommodation intelligence and analytics. Respond helpfully in the users language.",
+  "duties": [
+    "勤労の義務"
+  ],
+  "governance": {
+    "raci": "responsible",
+    "classification": "internal",
+    "complianceFrameworks": [
+      "minpaku-policy"
+    ]
+  },
+  "kpi": [
+    "credits の獲得"
+  ],
+  "name": "minpaku",
+  "nanoid": "mp7k9x2w",
+  "performerType": "service",
+  "pool": {},
+  "profile": {
+    "agentType": "autonomous",
+    "capabilities": [
+      "domain-query",
+      "data-management"
+    ],
+    "description": "Minpaku — AI Agent for accommodation intelligence and analytics",
+    "displayName": "Minpaku",
+    "isBot": true,
+    "operator": "etzhayyim.com"
+  },
+  "project": "minpaku",
+  "routes": [
+    {
+      "host": "minpaku.etzhayyim.com",
+      "paths": [
+        "/"
+      ],
+      "tls": true
+    },
+    {
+      "host": "mp7k9x2w.etzhayyim.com",
+      "paths": [
+        "/"
+      ],
+      "tls": true
+    }
+  ],
+  "runtimeType": "worker",
+  "space": {
+    "channels": [
+      {
+        "default": true,
+        "description": "Listing, reservation, and review updates",
+        "kind": "public",
+        "name": "minpaku-feed"
+      }
+    ],
+    "description": "民泊 vacation rental platform",
+    "historyVisibility": "world-readable",
+    "joinRule": "public",
+    "name": "Minpaku"
+  },
+  "triggers": {
+    "http": {
+      "listen": "0.0.0.0:8080",
+      "routes": [
+        "/api/grpc/...",
+        "/health",
+        "/healthz",
+        "/readyz",
+        "/..."
+      ],
+      "spa": true,
+      "staticDir": "/wasm/svelte/dist"
+    },
+    "subscribeRepos": {
+      "collections": [
+        "app.bsky.feed.like",
+        "app.bsky.feed.post",
+        "app.bsky.feed.repost",
+        "app.bsky.graph.follow",
+        "com.etzhayyim.apps.minpaku.minpakuEntity",
+        "com.etzhayyim.apps.minpaku.minpakuEvent",
+        "com.etzhayyim.apps.minpaku.minpakuReport"
+      ]
+    }
+  },
+  "ui": {},
+  "uiType": "appview",
+  "yata": {
+    "dataDir": "/data/yata",
+    "graphUri": "/data/graph"
+  }
+}
