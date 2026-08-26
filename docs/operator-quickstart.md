@@ -167,27 +167,33 @@ getListing("L-1").title → "Alice machiya"
 （base62 の nanoid をそのまま `listingId` にすると衝突する）。小文字 + 数字 +
 ハイフンに閉じるか、生成側で小文字化してから渡す。
 
-## 5. appview は standalone では install できない（実測）
+## 5. appview（2026-08-26、Svelte → ClojureScript 移行後）
+
+**2026-08-26 に旧 Svelte 5 + Vite scaffold を撤去し、
+`appview/minpaku-frontend-mp7k9x2w/cljs/`（shadow-cljs + reagent 1.2.0 +
+re-frame 1.4.3 + jp-go-dds）に置き換えた。** 旧 scaffold は `pnpm install` が
+`@etzhayyim/design-system@workspace:*`（この repo に無い workspace root を
+指す）で **`ERR_PNPM_WORKSPACE_PKG_NOT_FOUND`** で落ち、standalone では
+install すら通らなかった（実測はこの節の履歴に残る git log 参照）。新しい
+cljs scaffold は `deps.edn` の git 依存 + npm の `shadow-cljs` だけで完結し、
+その問題を構造的に持たない。
 
 ```bash
-cd appview/minpaku-frontend-mp7k9x2w/svelte && pnpm install
+cd appview/minpaku-frontend-mp7k9x2w/cljs
+npm install
+npx shadow-cljs compile app     # → public/js/app.js
+npx shadow-cljs compile test && node out/tests.js
 ```
 
-```
-ERR_PNPM_WORKSPACE_PKG_NOT_FOUND  In : "@etzhayyim/design-system@workspace:*" is in
-the dependencies but no package named "@etzhayyim/design-system" is present in the workspace
-Packages found in the workspace:
-```
+画面は `<h1>minpaku-frontend-mp7k9x2w</h1>` 相当（`dds/heading` 1 枚 + tagline）
+のままの scaffold —— **今日このコードで確かめられる新機能は無い。**
+`kotoba/src/` の listing/booking/payment ロジックとは無関係（今回の移行対象は
+appview のみ）。
 
-`workspace:*` は pnpm の workspace protocol で、`pnpm-workspace.yaml` を持つ親が要る。
-この repo にはそれが無い（**移行で app だけを切り出したので、workspace root が
-向こうに残っている**）。`App.svelte` は現状 `<h1>` 1 枚の scaffold なので、
-**今日この appview を動かして確かめられることは無い。**
-
-`kotodama.jsonld` が宣言している経路（`minpaku.etzhayyim.com` / `mp7k9x2w.etzhayyim.com`
-への routes、`/wasm/component.wasm`、`staticDir /wasm/svelte/dist`）も同様に、
-この tree の中には対応物が無い。**2026-08-15 実測、どちらのホストも DNS で
-解決しない**:
+`kotodama.jsonld` が宣言している経路（`minpaku.etzhayyim.com` /
+`mp7k9x2w.etzhayyim.com` への routes、`/wasm/component.wasm`、`staticDir`
+は今回 `/wasm/cljs/public` に更新）も同様に、この tree の中には対応物が無い。
+**2026-08-15 実測、どちらのホストも DNS で解決しない**:
 
 ```
 $ host minpaku.etzhayyim.com     → NXDOMAIN

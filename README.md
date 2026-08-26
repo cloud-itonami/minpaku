@@ -7,10 +7,11 @@ Stripe も無い。ADR-2606011400 の on-chain-only）。
 
 - **判断の核**: `kotoba/src/` — `listing` / `booking` / `tithe` / `settlement` / `types`。
   ここだけが単体テストの対象で、**12 本ある**。
-- **機構**: `appview/minpaku-frontend-mp7k9x2w/` — Svelte 5 + Vite の scaffold。
-  画面はまだ `<h1>minpaku-frontend-mp7k9x2w</h1>` の 1 枚で、**standalone では
-  install すらできない**（`@etzhayyim/design-system` が `workspace:*` を指すが、
-  この repo に workspace root が無い。実測は quickstart §5）。
+- **機構**: `appview/minpaku-frontend-mp7k9x2w/cljs/` — ClojureScript
+  (shadow-cljs + reagent 1.2.0 + re-frame 1.4.3 + jp-go-dds)の scaffold。
+  2026-08-26 に旧 Svelte 5 + Vite scaffold（`workspace:*` 依存で standalone
+  install すら通らなかった。実測は quickstart §5 に残す）から移行した。
+  画面はまだ `<h1>minpaku-frontend-mp7k9x2w</h1>` 相当の 1 枚。
 
 ## 動かす
 
