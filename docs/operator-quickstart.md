@@ -181,8 +181,8 @@ cljs scaffold は `deps.edn` の git 依存 + npm の `shadow-cljs` だけで完
 ```bash
 cd appview/minpaku-frontend-mp7k9x2w/cljs
 npm install
-npx shadow-cljs compile app     # → public/js/app.js
-npx shadow-cljs compile test && node out/tests.js
+amu compile --target wasm32-browser app     # → public/js/app.js
+amu compile --target wasm32-browser test && node out/tests.js
 ```
 
 画面は `<h1>minpaku-frontend-mp7k9x2w</h1>` 相当（`dds/heading` 1 枚 + tagline）
