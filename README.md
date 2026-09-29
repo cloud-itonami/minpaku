@@ -35,10 +35,10 @@ npm test        # → Test Files 1 passed / Tests 12 passed
 | 読む場所 | そこに書いてあるアプリ | コードに在るか |
 |---|---|---|
 | `kotoba/src/**` | 物件登録 → 予約 → USDC 決済 | **在る**（12 テストが緑） |
-| `CLAUDE.md` | OSM/Overpass と観光庁オープンデータを収集する accommodation intelligence（`collect_osm_accommodation` 等 7 コマンド） | **無い** — `osm` / `overpass` / `kankocho` / `collect_` / `minpaku_license` は CLAUDE.md の外に **1 件もヒットしない** |
+| `AGENTS.md` | OSM/Overpass と観光庁オープンデータを収集する accommodation intelligence（`collect_osm_accommodation` 等 7 コマンド） | **無い** — `osm` / `overpass` / `kankocho` / `collect_` / `minpaku_license` は AGENTS.md の外に **1 件もヒットしない** |
 | `appview/*/kotodama.jsonld` | `com.etzhayyim.apps.minpaku.minpakuEntity` / `minpakuEvent` / `minpakuReport` を購読する worker | **無い** — コードが書くのは `…minpaku.listing` / `.booking` / `.payment` の 3 つ |
 
-`CLAUDE.md` は移行前の seed（`etzhayyim/root` の `60-apps/etzhayyim-project-minpaku`、
+`AGENTS.md` は移行前の seed（`etzhayyim/root` の `60-apps/etzhayyim-project-minpaku`、
 `migration.edn` が revision `089210a` として記録している）の説明で、`kotoba/` は
 その後に書かれた別実装である。**この README はどちらも消していない** —— 消すのは
 別の仕事で、まず食い違いを可視化した。`kotodama.jsonld` の購読 collection のずれは
@@ -63,7 +63,7 @@ docstring の 1 行（民泊 / 宿屋）と DID prefix 定数の名前だけで�
 
 つまり **今日この 2 つを分けているのは DID 名前空間とラベルだけ**で、ドメインの
 差（民泊の届出番号、宿泊日数の上限、ホテル在庫との違い）はコードのどこにも無い。
-`CLAUDE.md` が書いている民泊固有の規則（`minpaku_license` 必須、チェックイン
+`AGENTS.md` が書いている民泊固有の規則（`minpaku_license` 必須、チェックイン
 15:00 / チェックアウト 10:00）も実装されていない。ここに書いておくのは、
 **差が在るかのように読ませないため**である。
 
